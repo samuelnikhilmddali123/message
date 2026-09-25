@@ -47,37 +47,14 @@ const Home = () => {
         {/* ============================================================ */}
         {/* 1. HERO SECTION (Rounded Banner with Mountain Sunrise & Cross) */}
         {/* ============================================================ */}
-        <section style={{
-          position: 'relative',
-          borderRadius: '16px',
-          overflow: 'hidden',
-          backgroundImage: 'url(/images/faith_hero_banner.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center right',
-          minHeight: '440px',
-          display: 'flex',
-          alignItems: 'center',
-          border: '1px solid var(--border-card)',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
-          marginBottom: '1.75rem'
-        }}>
-          {/* Subtle Warm Gradient Overlay for Left Side Readability */}
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to right, rgba(250, 247, 242, 0.96) 0%, rgba(250, 247, 242, 0.90) 36%, rgba(250, 247, 242, 0.45) 58%, rgba(250, 247, 242, 0) 100%)',
-            zIndex: 1
-          }} />
+        <section className="hero-banner-card">
+          {/* Responsive Gradient Overlay for Readability */}
+          <div className="hero-overlay" />
 
-          {/* Hero Content */}
-          <div style={{
-            position: 'relative',
-            zIndex: 2,
-            padding: '3rem 2.5rem',
-            maxWidth: '560px'
-          }}>
+          {/* Hero Content Box */}
+          <div className="hero-content-box">
             <h1 className="font-display" style={{
-              fontSize: 'clamp(2.4rem, 4vw, 3.5rem)',
+              fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
               fontWeight: 700,
               color: '#18231C',
               lineHeight: 1.12,
@@ -97,7 +74,7 @@ const Home = () => {
             </p>
 
             {/* CTA Button Group */}
-            <div className="flex items-center gap-3 flex-wrap" style={{ marginBottom: '1.25rem' }}>
+            <div className="flex items-center gap-3 flex-wrap hero-cta-group" style={{ marginBottom: '1.25rem' }}>
               <Link 
                 to="/donate" 
                 className="btn btn-green"
@@ -118,7 +95,7 @@ const Home = () => {
 
             {/* Lifetime Access Trust Badge */}
             <div className="flex items-center gap-2" style={{ color: '#4B5563', fontSize: '0.8125rem' }}>
-              <ShieldCheck size={16} style={{ color: '#4B5563' }} />
+              <ShieldCheck size={16} style={{ color: '#4B5563', flexShrink: 0 }} />
               <span>One-time donation of $5 or more for lifetime access</span>
             </div>
           </div>
@@ -233,24 +210,9 @@ const Home = () => {
             </div>
 
             {/* Featured Message Card */}
-            <div 
-              className="faith-card"
-              style={{
-                display: 'flex',
-                overflow: 'hidden',
-                borderRadius: '12px',
-                flexDirection: 'row'
-              }}
-            >
+            <div className="faith-card featured-message-card">
               {/* Thumbnail Image */}
-              <div style={{
-                width: '185px',
-                minWidth: '185px',
-                backgroundImage: 'url(/images/featured_message_path.jpg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                position: 'relative'
-              }}>
+              <div className="featured-message-thumb">
                 <div style={{
                   position: 'absolute',
                   inset: 0,
@@ -259,7 +221,7 @@ const Home = () => {
               </div>
 
               {/* Text Content */}
-              <div style={{ padding: '1.5rem 1.75rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <div style={{ padding: '1.5rem 1.5rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <span style={{ 
                   fontSize: '0.75rem', 
                   fontFamily: 'var(--font-sans)', 
@@ -318,7 +280,7 @@ const Home = () => {
             <div style={{
               backgroundColor: '#1E3A2F',
               borderRadius: '14px',
-              padding: '2.25rem 1.75rem 1.65rem',
+              padding: '2.25rem 1.5rem 1.65rem',
               color: '#FFFFFF',
               textAlign: 'center',
               position: 'relative',
@@ -398,7 +360,7 @@ const Home = () => {
             </div>
 
             {/* Testimonials Card */}
-            <div className="faith-card" style={{ padding: '1.5rem 1.75rem', position: 'relative' }}>
+            <div className="faith-card" style={{ padding: '1.5rem 1.5rem', position: 'relative' }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
                 
                 {/* Quotation Symbol */}
@@ -459,20 +421,7 @@ const Home = () => {
         {/* ============================================================ */}
         {/* 3. NEWSLETTER SECTION ("Join our community" Strip)            */}
         {/* ============================================================ */}
-        <section 
-          className="newsletter-bar"
-          style={{
-            backgroundColor: '#ECE5D8',
-            borderRadius: '12px',
-            padding: '1.25rem 2rem',
-            marginTop: '1.75rem',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '1.5rem',
-            border: '1px solid #E2D9C9'
-          }}
-        >
+        <section className="newsletter-bar">
           {/* Left info & mail icon */}
           <div className="flex items-center gap-3">
             <div style={{
@@ -499,7 +448,7 @@ const Home = () => {
           </div>
 
           {/* Right Email Form */}
-          <div style={{ minWidth: '340px' }}>
+          <div style={{ flex: 1, maxWidth: '400px' }}>
             {newsletterSubscribed ? (
               <div className="flex items-center gap-2" style={{
                 backgroundColor: '#FFFFFF',
@@ -512,7 +461,7 @@ const Home = () => {
                 <Check size={16} /> Subscribed! Thank you for joining our community.
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex gap-2" style={{ width: '100%' }}>
+              <form onSubmit={handleSubscribe} className="flex gap-2 newsletter-form">
                 <input 
                   type="email"
                   required

@@ -14,12 +14,12 @@ const Footer = () => {
         marginTop: 'auto',
         fontSize: '0.8125rem'
       }}>
-        <div className="container flex items-center justify-between flex-wrap gap-4">
+        <div className="container flex items-center justify-between flex-wrap gap-4 footer-bar">
           <div>
             &copy; 2026 Faith Journey. All Rights Reserved.
           </div>
 
-          <div className="flex items-center gap-3" style={{ color: '#A1A1AA' }}>
+          <div className="flex items-center gap-3 footer-links" style={{ color: '#A1A1AA' }}>
             <button 
               onClick={() => setModalType('privacy')} 
               style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 'inherit' }}

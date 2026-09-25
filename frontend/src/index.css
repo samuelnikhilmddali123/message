@@ -38,7 +38,7 @@
 
   /* Shadows */
   --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03);
   --shadow-elevated: 0 16px 36px rgba(24, 35, 28, 0.12);
 }
 
@@ -56,6 +56,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Headings */
@@ -255,63 +256,151 @@ a {
   animation: fadeIn 0.35s ease forwards;
 }
 
-/* Scripture Parchment Callout Block */
-.scripture-parchment {
-  background-color: var(--bg-cream);
-  border-left: 3px solid var(--gold-cross);
-  padding: 1.5rem 1.75rem;
-  margin: 1.5rem 0;
-  border-radius: 4px;
-}
-.scripture-parchment p {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-style: italic;
-  color: var(--text-dark);
-  line-height: 1.4;
-  margin-bottom: 0.4rem;
-}
-.scripture-parchment cite {
-  font-family: var(--font-cinzel);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--gold-cross);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-style: normal;
-  display: block;
-}
-
-/* Devotional Card (Old compatibility) */
-.devotional-card {
-  background-color: #FFFFFF;
+/* Specific Component Styles */
+.hero-banner-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-image: url(/images/faith_hero_banner.jpg);
+  background-size: cover;
+  background-position: center right;
+  min-height: 440px;
+  display: flex;
+  align-items: center;
   border: 1px solid var(--border-card);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.devotional-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.75rem;
 }
 
-/* Media Queries */
-@media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr !important;
-  }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(250, 247, 242, 0.96) 0%, rgba(250, 247, 242, 0.90) 38%, rgba(250, 247, 242, 0.45) 58%, rgba(250, 247, 242, 0) 100%);
+  z-index: 1;
+}
+
+.hero-content-box {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2.5rem;
+  max-width: 560px;
+}
+
+.featured-message-card {
+  display: flex;
+  overflow: hidden;
+  border-radius: 12px;
+  flex-direction: row;
+}
+
+.featured-message-thumb {
+  width: 185px;
+  min-width: 185px;
+  background-image: url(/images/featured_message_path.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.newsletter-bar {
+  background-color: #ECE5D8;
+  border-radius: 12px;
+  padding: 1.25rem 2rem;
+  margin-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  border: 1px solid #E2D9C9;
+}
+
+/* ============================================================ */
+/* RESPONSIVE & MOBILE DESIGN (Tablets & Smartphones)          */
+/* ============================================================ */
+@media (max-width: 960px) {
   .main-content-grid {
     grid-template-columns: 1fr !important;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .hero-banner-card {
+    min-height: auto;
+    background-position: center center;
+  }
+  
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(250, 247, 242, 0.96) 0%, rgba(250, 247, 242, 0.92) 65%, rgba(250, 247, 242, 0.82) 100%) !important;
+  }
+  
+  .hero-content-box {
+    padding: 2.25rem 1.25rem !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-cta-group {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+  }
+  
+  .hero-cta-group .btn {
+    width: 100% !important;
+    padding: 0.85rem 1rem !important;
+  }
+  
   .feature-cards-row {
     grid-template-columns: 1fr !important;
+    gap: 0.85rem !important;
   }
+  
   .newsletter-bar {
     flex-direction: column !important;
     align-items: stretch !important;
+    padding: 1.5rem 1.25rem !important;
+    gap: 1.25rem !important;
+  }
+  
+  .newsletter-form {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  
+  .newsletter-form input {
+    width: 100% !important;
+    min-width: 100% !important;
+    padding: 0.75rem 1rem !important;
+  }
+  
+  .newsletter-form button {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .featured-message-card {
+    flex-direction: column !important;
+  }
+  
+  .featured-message-thumb {
+    width: 100% !important;
+    min-width: 100% !important;
+    height: 180px !important;
+  }
+  
+  .footer-bar {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 0.85rem !important;
+  }
+  
+  .footer-links {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
   }
 }
