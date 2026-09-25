@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Menu, X, Mail, Phone, MapPin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -41,17 +41,18 @@ const Navbar = () => {
         zIndex: 100,
         boxShadow: '0 1px 4px rgba(0, 0, 0, 0.03)'
       }}>
-        <div className="container flex items-center justify-between" style={{ height: '76px' }}>
+        <div className="container navbar-inner">
           
           {/* Left: Faith Journey Brand & Cross */}
-          <Link to="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+          <Link to="/" className="navbar-brand" onClick={() => setMobileMenuOpen(false)}>
             {/* Elegant Latin Cross Symbol */}
             <div style={{
               color: '#B88536',
-              fontSize: '2rem',
+              fontSize: '1.85rem',
               lineHeight: 1,
               fontWeight: 700,
-              fontFamily: 'serif'
+              fontFamily: 'serif',
+              flexShrink: 0
             }}>
               ✝
             </div>
@@ -59,14 +60,14 @@ const Navbar = () => {
               <span className="font-display" style={{ 
                 color: '#18231C', 
                 fontWeight: 700, 
-                fontSize: '1.45rem', 
+                fontSize: '1.35rem', 
                 letterSpacing: '-0.01em', 
                 lineHeight: 1 
               }}>
                 Faith Journey
               </span>
               <span style={{ 
-                fontSize: '0.625rem', 
+                fontSize: '0.6rem', 
                 fontFamily: 'var(--font-sans)', 
                 color: '#5A625C', 
                 fontWeight: 600, 
@@ -80,126 +81,49 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8" style={{ display: 'flex' }}>
+          <nav className="desktop-nav">
             <Link 
               to="/" 
-              style={{ 
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: isActive('/') ? '#18231C' : '#4B5563',
-                position: 'relative',
-                padding: '6px 0'
-              }}
+              className={`nav-link ${isActive('/') ? 'active' : ''}`}
             >
               Home
-              {isActive('/') && (
-                <span style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  backgroundColor: '#B88536',
-                  borderRadius: '1px'
-                }} />
-              )}
+              {isActive('/') && <span className="active-indicator" />}
             </Link>
 
             <Link 
               to="/messages" 
-              style={{ 
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: isActive('/messages') ? '#18231C' : '#4B5563',
-                position: 'relative',
-                padding: '6px 0'
-              }}
+              className={`nav-link ${isActive('/messages') ? 'active' : ''}`}
             >
               Messages
-              {isActive('/messages') && (
-                <span style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  backgroundColor: '#B88536',
-                  borderRadius: '1px'
-                }} />
-              )}
+              {isActive('/messages') && <span className="active-indicator" />}
             </Link>
 
             <Link 
               to="/about" 
-              style={{ 
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: isActive('/about') ? '#18231C' : '#4B5563',
-                position: 'relative',
-                padding: '6px 0'
-              }}
+              className={`nav-link ${isActive('/about') ? 'active' : ''}`}
             >
               About
-              {isActive('/about') && (
-                <span style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  backgroundColor: '#B88536',
-                  borderRadius: '1px'
-                }} />
-              )}
+              {isActive('/about') && <span className="active-indicator" />}
             </Link>
 
             <button 
               onClick={() => setContactModalOpen(true)}
-              style={{ 
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: '#4B5563',
-                padding: '6px 0'
-              }}
+              className="nav-link-btn"
             >
               Contact
             </button>
 
             <Link 
               to="/donate" 
-              style={{ 
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.875rem',
-                fontWeight: 500,
-                color: isActive('/donate') ? '#18231C' : '#4B5563',
-                position: 'relative',
-                padding: '6px 0'
-              }}
+              className={`nav-link ${isActive('/donate') ? 'active' : ''}`}
             >
               Donate
-              {isActive('/donate') && (
-                <span style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  backgroundColor: '#B88536',
-                  borderRadius: '1px'
-                }} />
-              )}
+              {isActive('/donate') && <span className="active-indicator" />}
             </Link>
           </nav>
 
           {/* Desktop Right Action Buttons */}
-          <div className="hidden md:flex items-center gap-3" style={{ display: 'flex' }}>
+          <div className="desktop-actions">
             {user ? (
               <div className="flex items-center gap-3">
                 <Link 
@@ -245,36 +169,37 @@ const Navbar = () => {
 
           {/* Mobile menu hamburger */}
           <button 
-            className="md:hidden flex items-center justify-center"
+            className="mobile-nav-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#18231C', padding: '0.5rem' }}
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
 
         </div>
 
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div style={{
-            backgroundColor: '#FFFFFF',
-            borderTop: '1px solid #EAE5DB',
-            padding: '1.25rem 1.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem'
-          }}>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 500, padding: '0.4rem 0' }}>Home</Link>
-            <Link to="/messages" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 500, padding: '0.4rem 0' }}>Messages</Link>
-            <Link to="/about" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 500, padding: '0.4rem 0' }}>About</Link>
+          <div className="mobile-drawer">
+            <Link to="/" onClick={() => setMobileMenuOpen(false)} className={`mobile-nav-item ${isActive('/') ? 'active' : ''}`}>
+              Home
+            </Link>
+            <Link to="/messages" onClick={() => setMobileMenuOpen(false)} className={`mobile-nav-item ${isActive('/messages') ? 'active' : ''}`}>
+              Messages
+            </Link>
+            <Link to="/about" onClick={() => setMobileMenuOpen(false)} className={`mobile-nav-item ${isActive('/about') ? 'active' : ''}`}>
+              About
+            </Link>
             <button 
               onClick={() => { setMobileMenuOpen(false); setContactModalOpen(true); }} 
-              style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontWeight: 500, padding: '0.4rem 0', fontFamily: 'inherit', fontSize: '1rem', color: 'inherit' }}
+              className="mobile-nav-item"
+              style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit', fontSize: '1rem', color: '#18231C' }}
             >
               Contact
             </button>
-            <Link to="/donate" onClick={() => setMobileMenuOpen(false)} style={{ fontWeight: 500, padding: '0.4rem 0' }}>Donate</Link>
+            <Link to="/donate" onClick={() => setMobileMenuOpen(false)} className={`mobile-nav-item ${isActive('/donate') ? 'active' : ''}`}>
+              Donate
+            </Link>
             
             <div style={{ height: '1px', backgroundColor: '#EAE5DB', margin: '0.5rem 0' }}></div>
             
